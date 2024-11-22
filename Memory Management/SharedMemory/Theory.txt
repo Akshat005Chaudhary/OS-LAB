@@ -1,0 +1,44 @@
+Shared Memory is one of the most efficent mechanisms for IPC.
+
+
+IPC through shared memory is way a way where commumication btw multiple processes is done through shared memory and changes made by one process can be viewed by another process.
+
+
+Difference btw Shared memory and pipes is that the former is faster. This is due to the involvement of kernal in pipes where data is copied twice that is btw the user space and kernal.
+
+
+The problem with pipes, fifo and message queue – is that for two process to
+exchange information. The information has to go through the kernel.
+
+- Server reads from the input file.
+- The server writes this data in a message using either a pipe, fifo or
+message queue.
+- The client reads the data from the IPC channel,again requiring the data to
+be copied from kernel’s IPC buffer to the client’s buffer.
+- Finally the data is copied from the client’s buffer.
+A total of four copies of data are requied[2 read and 2 write].So, shared
+memory provides a way by letting two or more processes share a memory
+segment.
+With Shared Memory the data is only copied twice – from input file into shared
+memory and from shared memory to the output file.
+
+
+The shared memory is a memory segment that multiple processes can access concurrently. 
+
+
+How Shared Memory IPC Works:
+- A process usually the parent creates a shared memory segment using shmget() which is given a unique identifier (shmid)
+- Use ftok() to generate shmid
+- The processes that need to access the shared memory attaches themselves to the shared memory using shmat()
+- Since multiple processes can access shared memory simultaneously therefore use of semaphores is made.
+- When shared memory is no longer needed detach the process using shmdt() 
+- Once all processes are detached, remove the shared memory segment completely using shmctl()
+
+
+Advantages of Shared Memory:
+- Increased speed than other IPC methods
+
+Disadvantages of Shared Memory:
+- Increased Complexity due to use of semaphores
+- Increased security risks due to multiple processes having access to the memory segment
+
