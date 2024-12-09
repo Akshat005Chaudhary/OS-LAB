@@ -1,9 +1,4 @@
-/*
-Parent and Child Process Identification
-
-This simple program differentiates between the parent and the child using fork() and shows their respective Process IDs (PIDs).
-*/
-
+// Week 1: Demonstration of fork() system call
 
 #include <bits/stdc++.h>
 using namespace std;
